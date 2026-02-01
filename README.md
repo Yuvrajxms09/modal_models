@@ -1,4 +1,7 @@
-Production-ready inference deployments for TTS and image generation models on Modal. Each model runs as a separate FastAPI service with GPU acceleration, persistent volume storage, and automatic scaling.
+
+Inference deployments for TTS and image generation models on Modal. Each model runs as a separate FastAPI service with GPU acceleration and persistent volume storage.
+
+**Note:** These are hobbyist deployments I run in my free time. They're not production-ready - missing authentication, rate limiting, proper error handling, and other production features. 
 
 ## Models
 
@@ -119,6 +122,16 @@ curl -X POST https://<workspace>--higgs-audio-web-endpoint.modal.run/generate \
   -F "text=Hello world" \
   --output audio.wav
 ```
+
+## Caveats
+
+- **No authentication** - endpoints are publicly accessible
+- **No rate limiting** - can be abused
+- **No monitoring/alerting** - failures go unnoticed
+- **Basic error handling** - errors might not be user-friendly
+- **No request validation** - malformed requests can crash services
+
+These work fine for personal projects and testing, but don't use them for anything that needs reliability or security.
 
 ## Requirements
 
