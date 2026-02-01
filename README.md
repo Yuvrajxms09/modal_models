@@ -1,50 +1,129 @@
-# modal_models
+# Modal Models
 
-## Overview
+Production-ready inference deployments for TTS and image generation models on Modal. Each model runs as a separate FastAPI service with GPU acceleration, persistent volume storage, and automatic scaling.
 
-This repository provides scalable, GPU-powered inference services deployed on [Modal](https://modal.com) for:
+## Models
 
-- **Qwen Image Edit** - Advanced image editing using diffusion models
-- **Cosmos Predict2 Text2Image** - High-quality text-to-image generation
-- **Higgs Audio TTS** - Text-to-speech with voice cloning capabilities
+- **qwen3tts** - Qwen3-TTS with custom voice, voice design, and voice cloning
+- **sopranostts** - Soprano TTS text-to-speech
+- **higgs** - Higgs Audio TTS with voice cloning
+- **cosmost2i** - Cosmos Predict2 text-to-image generation
+- **omnigen2** - OmniGen2 image generation (text2img, editing, in-context)
+- **qwenimageedit** - Qwen Image Edit for natural language image editing
 
-All services are designed for production use with automatic scaling, persistent model storage via Modal volumes, and S3-based output hosting.
+## Setup
 
-## Quick Start
+### Clone Repository
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd 11_bs
-   ```
+```bash
+git clone <repository-url>
 
-2. **Set up Modal secrets** in Modal dashboard:
-   - `huggingface-secret` (HF_TOKEN)
-   - `nvidia-ngc-secret` (NGC_API_KEY)
-   - `aws-s3-secrets` (AWS credentials)
+```
 
-3. **Upload models to Modal volumes**
-   ```bash
-   modal run modal/scripts/upload_models.py
-   ```
-   > **Note:** Configure model IDs and volume names in `modal/scripts/upload_models.py` before running.
+### Configure Secrets
 
-4. **Deploy services**
-   ```bash
-   modal deploy modal/models/qwen.py modal/models/cosmos.py modal/models/higgs.py
-   ```
+Set up Modal secrets:
+- `huggingface-secret` (HF_TOKEN)
+- `nvidia-ngc-secret` (NGC_API_KEY) - Required for cosmos, higgs, qwenimageedit
+- `aws-s3-secrets` (AWS credentials) - Required for S3 upload endpoints
 
-5. **Use the API endpoints** - See [USAGE.md](./USAGE.md)
+### Upload Models
 
-## Services
+Each model folder contains an `upload_models.py` script. Update model IDs in the script, then run:
 
-- **Qwen Image Edit** - Image editing with natural language
-- **Cosmos Predict2** - Text-to-image generation
-- **Higgs Audio** - Text-to-speech with voice cloning
+```bash
+modal run <model-folder>/upload_models.py
+```
+
+Example:
+```bash
+modal run qwen3tts/upload_models.py
+```
+
+### Deploy
+
+```bash
+modal deploy <model-folder>/inference.py
+```
+
+Example:
+```bash
+modal deploy qwen3tts/inference.py
+```
+
+## API Usage
+
+Endpoints follow the pattern: `https://<your-workspace>--<endpoint-label>.modal.run`
+
+### Qwen3-TTS
+
+```bash
+# Custom voice
+curl -X POST https://<workspace>--qwen3-tts-web-endpoint.modal.run/v1/audio/speech/custom-voice \
+  -H "Content-Type: application/json" \
+  -d '{"input": "Hello world", "language": "English", "speaker": "Ryan"}' \
+  --output speech.wav
+
+# Voice design
+curl -X POST https://<workspace>--qwen3-tts-web-endpoint.modal.run/v1/audio/speech/voice-design \
+  -H "Content-Type: application/json" \
+  -d '{"input": "Text here", "language": "English", "instruct": "Speak in a cheerful tone"}' \
+  --output speech.wav
+
+# Voice clone
+curl -X POST https://<workspace>--qwen3-tts-web-endpoint.modal.run/v1/audio/speech/voice-clone \
+  -H "Content-Type: application/json" \
+  -d '{"input": "Text here", "ref_audio": "https://example.com/ref.wav", "ref_text": "Reference transcript"}' \
+  --output speech.wav
+```
+
+### Soprano TTS
+
+```bash
+curl -X POST https://<workspace>--soprano-web-endpoint.modal.run/v1/audio/speech \
+  -H "Content-Type: application/json" \
+  -d '{"input": "Hello world"}' \
+  --output speech.wav
+```
+
+### Cosmos Text2Image
+
+```bash
+curl -X POST https://<workspace>--cosmos-text2image-web-endpoint.modal.run/generate \
+  -F "prompt=a beautiful landscape" \
+  -F "aspect_ratio=16:9" \
+  --output image.jpg
+```
+
+### OmniGen2
+
+```bash
+curl -X POST https://<workspace>--omnigen2.modal.run \
+  -F "prompt=a beautiful landscape" \
+  -F "width=1024" \
+  -F "height=1024" \
+  --output image.png
+```
+
+### Qwen Image Edit
+
+```bash
+curl -X POST https://<workspace>--qwen-image-edit-endpoint.modal.run/generate \
+  -F "prompt=add a sunset" \
+  -F "input_image_url=https://example.com/image.jpg" \
+  --output output.png
+```
+
+### Higgs Audio
+
+```bash
+curl -X POST https://<workspace>--higgs-audio-web-endpoint.modal.run/generate \
+  -F "text=Hello world" \
+  --output audio.wav
+```
 
 ## Requirements
 
-- Modal account
-- NVIDIA NGC account
-- AWS account (for S3)
-- HuggingFace account
+- Modal account with GPU access
+- Python 3.11+
+- Modal CLI installed (`pip install modal`)
