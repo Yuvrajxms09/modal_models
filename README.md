@@ -1,5 +1,3 @@
-# Modal Models
-
 Production-ready inference deployments for TTS and image generation models on Modal. Each model runs as a separate FastAPI service with GPU acceleration, persistent volume storage, and automatic scaling.
 
 ## Models
