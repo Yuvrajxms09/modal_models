@@ -1,5 +1,5 @@
 
-Inference deployments for TTS and image generation models on Modal. Each model runs as a separate FastAPI service with GPU acceleration and persistent volume storage.
+Inference deployments for TTS and image generation models on modal.com Each model runs as a separate FastAPI service with GPU acceleration and persistent volume storage.
 
 **Note:** These are hobbyist deployments I run in my free time. They're not production-ready - missing authentication, rate limiting, proper error handling, and other production features. 
 
