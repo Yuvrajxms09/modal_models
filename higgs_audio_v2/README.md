@@ -14,7 +14,7 @@ Higgs Audio text-to-speech model deployment on Modal.
 Update `upload_models.py` with the correct Higgs Audio model IDs from HuggingFace, then run:
 
 ```bash
-modal run higgs/upload_models.py
+modal run higgs_audio_v2/upload_models.py
 ```
 
 ### 2. Deploy Inference API
@@ -22,7 +22,7 @@ modal run higgs/upload_models.py
 Deploy the inference API:
 
 ```bash
-modal deploy higgs/inference.py
+modal deploy higgs_audio_v2/inference.py
 ```
 
 ## Requirements

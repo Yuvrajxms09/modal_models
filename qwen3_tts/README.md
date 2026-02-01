@@ -14,7 +14,7 @@ Qwen3-TTS text-to-speech model deployment on Modal.
 First, download all Qwen3-TTS models to the Modal volume:
 
 ```bash
-modal run qwen3/upload_models.py
+modal run qwen3_tts/upload_models.py
 ```
 
 This will download:
@@ -30,7 +30,7 @@ This will download:
 Deploy the inference API:
 
 ```bash
-modal deploy qwen3/inference.py
+modal deploy qwen3_tts/inference.py
 ```
 
 ## Configuration

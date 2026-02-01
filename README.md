@@ -4,12 +4,12 @@ Production-ready inference deployments for TTS and image generation models on Mo
 
 ## Models
 
-- **qwen3tts** - Qwen3-TTS with custom voice, voice design, and voice cloning
-- **sopranostts** - Soprano TTS text-to-speech
-- **higgs** - Higgs Audio TTS with voice cloning
-- **cosmost2i** - Cosmos Predict2 text-to-image generation
+- **qwen3_tts** - Qwen3-TTS with custom voice, voice design, and voice cloning
+- **soprano_tts** - Soprano TTS text-to-speech
+- **higgs_audio_v2** - Higgs Audio TTS with voice cloning
+- **cosmos_predict2_t2i** - Cosmos Predict2 text-to-image generation
 - **omnigen2** - OmniGen2 image generation (text2img, editing, in-context)
-- **qwenimageedit** - Qwen Image Edit for natural language image editing
+- **qwen_image_edit** - Qwen Image Edit for natural language image editing
 
 ## Setup
 
@@ -24,7 +24,7 @@ git clone <repository-url>
 
 Set up Modal secrets:
 - `huggingface-secret` (HF_TOKEN)
-- `nvidia-ngc-secret` (NGC_API_KEY) - Required for cosmos, higgs, qwenimageedit
+- `nvidia-ngc-secret` (NGC_API_KEY) - Required for cosmos_predict2_t2i, higgs_audio_v2, qwen_image_edit
 - `aws-s3-secrets` (AWS credentials) - Required for S3 upload endpoints
 
 ### Upload Models
@@ -37,7 +37,7 @@ modal run <model-folder>/upload_models.py
 
 Example:
 ```bash
-modal run qwen3tts/upload_models.py
+modal run qwen3_tts/upload_models.py
 ```
 
 ### Deploy
@@ -48,7 +48,7 @@ modal deploy <model-folder>/inference.py
 
 Example:
 ```bash
-modal deploy qwen3tts/inference.py
+modal deploy qwen3_tts/inference.py
 ```
 
 ## API Usage

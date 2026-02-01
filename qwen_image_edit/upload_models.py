@@ -68,7 +68,7 @@ def upload_models_to_volume(models: list):
 def download_models():
     models_config = [
         {
-            "model_id": "",  # TODO: Add Qwen Image Edit model ID from HuggingFace
+            "model_id": "Qwen/Qwen-Image-Edit",
             "local_dir": "Qwen-Image-Edit"
         }
     ]

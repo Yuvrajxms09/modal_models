@@ -14,7 +14,7 @@ Cosmos Predict2 text-to-image generation model deployment on Modal.
 **Note:** Cosmos Predict2 models are typically downloaded from NVIDIA NGC. Update `upload_models.py` with the correct model IDs or download paths, then run:
 
 ```bash
-modal run cosmost2i/upload_models.py
+modal run cosmos_predict2_t2i/upload_models.py
 ```
 
 ### 2. Deploy Inference API
@@ -22,7 +22,7 @@ modal run cosmost2i/upload_models.py
 Deploy the inference API:
 
 ```bash
-modal deploy cosmost2i/inference.py
+modal deploy cosmos_predict2_t2i/inference.py
 ```
 
 ## Requirements

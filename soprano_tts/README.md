@@ -14,7 +14,7 @@ Soprano TTS text-to-speech model deployment on Modal.
 **Note:** Soprano TTS loads models directly from HuggingFace at runtime, so uploading to volume is optional. If you want to pre-download models, update `upload_models.py` with the correct model ID and run:
 
 ```bash
-modal run sopranostts/upload_models.py
+modal run soprano_tts/upload_models.py
 ```
 
 ### 2. Deploy Inference API
@@ -22,7 +22,7 @@ modal run sopranostts/upload_models.py
 Deploy the inference API:
 
 ```bash
-modal deploy sopranostts/inference.py
+modal deploy soprano_tts/inference.py
 ```
 
 ## API Endpoints

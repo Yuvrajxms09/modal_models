@@ -14,7 +14,7 @@ Qwen Image Edit model deployment on Modal.
 Update `upload_models.py` with the correct Qwen Image Edit model ID from HuggingFace, then run:
 
 ```bash
-modal run qwenimageedit/upload_models.py
+modal run qwen_image_edit/upload_models.py
 ```
 
 ### 2. Deploy Inference API
@@ -22,7 +22,7 @@ modal run qwenimageedit/upload_models.py
 Deploy the inference API:
 
 ```bash
-modal deploy qwenimageedit/inference.py
+modal deploy qwen_image_edit/inference.py
 ```
 
 ## Requirements

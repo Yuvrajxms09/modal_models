@@ -68,8 +68,8 @@ def upload_models_to_volume(models: list):
 def download_models():
     models_config = [
         {
-            "model_id": "",  # TODO: Add OmniGen2 model ID from HuggingFace
-            "local_dir": ""  # TODO: Update with correct local directory name
+            "model_id": "OmniGen2/OmniGen2",
+            "local_dir": ""
         }
     ]
     

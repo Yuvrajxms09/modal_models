@@ -1,10 +1,10 @@
 import modal
 import os
 
-app = modal.App(name="higgs-model-uploader")
+app = modal.App(name="cosmos-model-uploader")
 
 MODEL_PATH = "/models"
-volume = modal.Volume.from_name("HiggsAudio-assets", create_if_missing=True)
+volume = modal.Volume.from_name("nvidia_cosmos_assets", create_if_missing=True)
 
 image = (
     modal.Image.debian_slim()
@@ -68,12 +68,12 @@ def upload_models_to_volume(models: list):
 def download_models():
     models_config = [
         {
-            "model_id": "",  # TODO: Add Higgs Audio model ID from HuggingFace
-            "local_dir": "higgs-audio-v2-generation-3B-base"
+            "model_id": "nvidia/Cosmos-Predict2-14B-Text2Image",
+            "local_dir": "checkpoints/nvidia/Cosmos-Predict2-14B-Text2Image"
         },
         {
-            "model_id": "",  # TODO: Add Higgs Audio tokenizer ID
-            "local_dir": "higgs-audio-v2-tokenizer"
+            "model_id": "google/t5-v1_1-xxl",
+            "local_dir": "checkpoints/google-t5/t5-11b"
         }
     ]
     
