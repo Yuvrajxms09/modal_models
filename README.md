@@ -12,6 +12,7 @@ Each model runs as a separate FastAPI service with GPU acceleration and persiste
 - **cosmos_predict2_t2i** - Cosmos Predict2 text-to-image generation
 - **omnigen2** - OmniGen2 image generation (text2img, editing, in-context)
 - **qwen_image_edit** - Qwen Image Edit for natural language image editing
+- **glm_ocr** - GLM-OCR for high-quality document parsing and OCR
 
 ## Setup
 
@@ -122,6 +123,19 @@ curl -X POST https://<workspace>--qwen-image-edit-endpoint.modal.run/generate \
 curl -X POST https://<workspace>--higgs-audio-web-endpoint.modal.run/generate \
   -F "text=Hello world" \
   --output audio.wav
+```
+
+### GLM-OCR
+
+```bash
+# Parse image from URL
+curl -X POST https://<workspace>--glm-ocr-api.modal.run/glmocr/parse \
+  -H "Content-Type: application/json" \
+  -d '{"images": ["https://example.com/image.jpg"]}'
+
+# Parse image from local file
+curl -X POST https://<workspace>--glm-ocr-api.modal.run/glmocr/parse \
+  -F "files=@/path/to/image.png"
 ```
 
 ## Caveats
